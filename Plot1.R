@@ -26,7 +26,7 @@ if(!file.exists(file.name)){
         unlink(file.zip)
 }
 
-fulldata.df <- read.csv(filename, header=T, sep=';', na.strings="?", quote='\"')
+fulldata.df <- read.csv(file.name, header=T, sep=';', na.strings="?", quote='\"')
 fulldata.df$Date <- as.Date(fulldata.df$Date,format="%d/%m/%Y")
 
 consumption.df <- subset(fulldata.df, subset=(Date >= "2007-02-01" & Date <= "2007-02-02"))

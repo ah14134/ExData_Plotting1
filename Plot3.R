@@ -25,6 +25,9 @@ if(!file.exists(file.name)){
         unzip(file.zip, exdir = "./data")
         unlink(file.zip)
 }
+fulldata.df <- read.csv(file.name, header=T, sep=';', na.strings="?", quote='\"')
+fulldata.df$Date <- as.Date(fulldata.df$Date,format="%d/%m/%Y")
+
 consumption.df <- subset(fulldata.df, subset=(Date >= "2007-02-01" & Date <= "2007-02-02"))
 rm(fulldata.df)
 
@@ -34,6 +37,7 @@ consumption.df$Datetime <- as.POSIXct(datetime)
 
 
 ## Plot 3
+par(mar=c(2,2,1,1), oma=c(0,0,0,0))
 with(consumption.df, {
         plot(Sub_metering_1~Datetime, type="l",
              ylab="Global Active Power (kilowatts)", xlab="")
